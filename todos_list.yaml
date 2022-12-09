@@ -1,0 +1,8 @@
+- email: mm@mm.com
+  priority_idx: 0
+  task: T1
+  todo_idx: 1
+- email: max@max.com
+  priority_idx: 0
+  task: Tas 2
+  todo_idx: 2

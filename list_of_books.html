@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <script type="text/javascript">
+        function doClean(idx)
+        {
+            document.getElementById("idx").value=idx;
+            document.getElementById("main_form").action="/delete";
+            document.getElementById("main_form").submit();
+        }
+        function searchGoogle()
+        {
+            document.getElementById("new_task").action="/googleapi";
+            document.getElementById("new_task").submit();
+        }
+    </script>
+  <head>
+    <title>todoapp !</title>
+  </head>
+    <form id="main_form" action="/delete" method="get">
+        <input name="idx" id="idx" type="hidden" value=-1>
+        <br>
+        <table>
+            <tr>
+                <th>All available TO DOs:</th><th></th><th></th><th></th><th></th>
+            </tr>
+            {% for book in books -%}
+            <tr>
+                <td>Title: {{book.title}}</td><td>Authors: {{book.authors}}</td><td>Pages: {{book.pageCount}}</td><td>Rating: {{book.rating}}</td>
+                <td><input type="button" value="Delete ({{book.isbn}})" onclick="doClean('{{book.isbn}}')"></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    <form id="clear_form" action="/clear" method="get">
+        <table>
+            <tr>
+                <td>..</td>
+            </tr>
+        </table>
+    </form>
+    <form id="new_task" action="/submit" method="get">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" id="isbn" name="isbn" value=""> <input type="button" value="Search Google API" onclick="searchGoogle()">
+                </td>
+            </tr>
+        </table>
+    </form>
+  <body>
+  </body>
+</html>

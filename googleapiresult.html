@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <script type="text/javascript">
+        function doGoBack()
+        {
+            document.getElementById("main_form").action="/delete";
+            document.getElementById("main_form").submit();
+        }
+        function searchGoogle(idx)
+        {
+            document.getElementById("main_form").action="/googleapi";
+            document.getElementById("main_form").submit();
+        }
+    </script>
+  <head>
+    <title>todoapp !</title>
+  </head>
+  <body>
+    <form id="main_form" action="/add" method="get">
+        <input name="isbn" id="isbn" type="hidden" value={{isbn}}>
+        <br>
+        <table>
+            <tr>
+                <th>Google API result by ISBM:</th><th></th><th></th>
+            </tr>
+            <tr>
+                <td>Title:  </td><td>{{title}}</td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>Authors:  </td><td>{{authors}}</td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>Pages:  </td><td>{{pageCount}}</td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>Rating:  </td><td>{{rating}}</td><td></td><td></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Add To Book Collectin"></td><td><input type="button" value="Go Back" onclick="doGoBack()"></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+        </table>
+    </form>
+    {{error}}
+  </body>
+</html>

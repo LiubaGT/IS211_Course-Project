@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+    <script type="text/javascript">
+        function doClean(idx)
+        {
+            document.getElementById("idx").value=idx;
+            document.getElementById("main_form").action="/delete";
+            document.getElementById("main_form").submit();
+        }
+        function searchGoogle()
+        {
+            document.getElementById("new_task").action="/googleapi";
+            document.getElementById("new_task").submit();
+        }
+    </script>
+  <head>
+    <title>todoapp !</title>
+  </head>
+    <form id="main_form" action="/delete" method="get">
+        <input name="idx" id="idx" type="hidden" value=-1>
+        <br>
+        <table>
+            <tr>
+                <th>All available TO DOs:</th><th></th><th></th><th></th><th></th>
+            </tr>
+            {% for todo in todos -%}
+            <tr>
+                <td>-  {{todo.todo_idx}}</td><td>  {{Priorities[todo.priority_idx]}}  </td><td>{{todo.email}}</td><td>{{todo.task}}</td><td><input type="button" value="Delete ({{todo.todo_idx}})" onclick="doClean('{{todo.todo_idx}}')"></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    <form id="clear_form" action="/clear" method="get">
+        <table>
+            <tr>
+                <td><input type="submit" value="Clear"></td>
+            </tr>
+        </table>
+    </form>
+    <form id="new_task" action="/submit" method="get">
+        <table>
+            <tr>
+                <th>New To Do Item</th>
+            </tr>
+            <tr>
+                <td>
+                    <label>Priority:</label>
+                    <select name="priority" id="priority">
+                        {%for i in range(0, priorities_len)%}
+                        <option value="{{ i }}">{{ Priorities[i] }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Task:  </label><input type="text" id="Task" name="Task" value="">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>email:  </label><input type="text" id="email" name="email" value="">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Add To Do Item">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="isbn" name="isbn" value=""> <input type="button" value="Search Google API" onclick="searchGoogle()">
+                </td>
+            </tr>
+        </table>
+    </form>
+  <body>
+  </body>
+</html>
